@@ -21,6 +21,8 @@ export default function Keys() {
     locationName: '',
     description: '',
     keyPrefix: generateKeyPrefix(),
+    status: 'available' as 'available' | 'verified' | 'missing',
+    deviceId: null,
   });
   const [filter, setFilter] = useState<string>('all');
   
@@ -58,6 +60,8 @@ export default function Keys() {
       locationName: '',
       description: '',
       keyPrefix: generateKeyPrefix(),
+      status: 'available',
+      deviceId: null,
     });
     setIsAddDialogOpen(false);
     
@@ -132,8 +136,8 @@ export default function Keys() {
         ) : filteredKeys.length > 0 ? (
           filteredKeys.map((key) => (
             <KeyCard 
-              key={key.id} 
-              key={key}
+              key={key.id}
+              keyData={key}
               onClick={() => handleKeyClick(key)}
               actions={
                 <div className="flex space-x-1">
